@@ -81,14 +81,25 @@ module "security-group" {
   }
 }
 
-data "aws_ami" "amazon-linux" {
+data "aws_ami" "amzlinux2" {
   most_recent = true
-  owners      = ["amazon"]
+  owners = [ "amazon" ]
   filter {
-    name   = "name"
-    values = ["al2023-ami-*"]
+    name = "name"
+    values = [ "amzn2-ami-hvm-*-gp2" ]
   }
-
+  filter {
+    name = "root-device-type"
+    values = [ "ebs" ]
+  }
+  filter {
+    name = "virtualization-type"
+    values = [ "hvm" ]
+  }
+  filter {
+    name = "architecture"
+    values = [ "x86_64" ]
+  }
 }
 
 resource "aws_instance" "Web-App" {
@@ -103,4 +114,5 @@ resource "aws_instance" "Web-App" {
   tags = {
     name = "My-Web-APP"
   }
+
 }
