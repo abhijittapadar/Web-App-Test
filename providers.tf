@@ -103,7 +103,7 @@ data "aws_ami" "amzlinux2" {
 }
 
 resource "aws_instance" "Web-App" {
-  ami = data.aws_ami.amazon-linux.id
+  ami = data.aws_ami.amzlinux2.id
   instance_type = "t2.micro"
   subnet_id = aws_subnet.public-subnet.id
   vpc_security_group_ids = [module.security-group.security_group_id]
@@ -116,3 +116,4 @@ resource "aws_instance" "Web-App" {
   }
 
 }
+
